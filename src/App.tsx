@@ -1,18 +1,24 @@
-import { useState } from 'react';
+import { Routes, Route } from "react-router";
+import Login from './pages/Login';
+import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
-  const [name, setName] = useState("");
   return (
-    <div>
-      <h1>Task Planner</h1>
-      <input
-      type="text"
-      value={name}
-      onChange={(e) => setName(e.target.value)}
-      placeholder="Type your name..."/>
-      <p>Hello, {name}</p>
-    </div>
-  );    
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+    </Routes>
+  );
 }
 
 export default App;
